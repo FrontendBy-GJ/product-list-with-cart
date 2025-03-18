@@ -1,9 +1,11 @@
+import ProductsList from './features/products/ProductsList';
+
 function App() {
   return (
     <main>
       <section>
         <h1>Desserts</h1>
-        {/* Products List */}
+        <ProductsList />
       </section>
       {/* Cart */}
       <aside>
