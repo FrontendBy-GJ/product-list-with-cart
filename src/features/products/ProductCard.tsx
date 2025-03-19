@@ -1,9 +1,18 @@
-import { useAppDispatch } from '@/app/hooks';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { formatToUSDCurrency } from '@/utils/utils';
-import { addToCart, CartItem } from '../cart/cartSlice';
+import {
+  addToCart,
+  decreaseQty,
+  increaseQty,
+  removeFromCart,
+  selectCartItems,
+} from '../cart/cartSlice';
 import { useState } from 'react';
+import CartIcon from '@/assets/icon-add-to-cart.svg';
+import DecrementIcon from '@/assets/icon-decrement-quantity.svg';
+import IncrementIcon from '@/assets/icon-increment-quantity.svg';
 
-type ProductType = {
+export type ProductType = {
   image: {
     thumbnail: string;
     mobile: string;
@@ -17,26 +26,32 @@ type ProductType = {
 
 const ProductCard = (product: ProductType) => {
   const [itemQty, setItemQty] = useState(1);
+  const [isAddedToCart, setIsAddedToCart] = useState(false);
   const { category, image, name, price } = product;
   const dispatch = useAppDispatch();
+  const item = useAppSelector(selectCartItems);
 
   const handleQtyChange = (action: 'increment' | 'decrement') => {
-    if (action !== 'decrement' && action !== 'increment')
-      throw new Error('Not a valid action');
-
     if (action === 'decrement') {
-      if (itemQty <= 1) return;
-      setItemQty((prev) => prev - 1);
-    } else if (action === 'increment') {
+      if (itemQty === 1) {
+        dispatch(removeFromCart(product));
+      } else {
+        setItemQty((prev) => prev - 1);
+        dispatch(decreaseQty(product));
+      }
+    } else {
       setItemQty((prev) => prev + 1);
+      dispatch(increaseQty(product));
     }
   };
 
-  const addItemToCart = (item: CartItem) => {
+  const addItemToCart = (item: ProductType) => {
+    setItemQty(1);
+    setIsAddedToCart(true);
     dispatch(
       addToCart({
         ...item,
-        quantity: itemQty,
+        quantity: 1,
       })
     );
   };
@@ -51,14 +66,30 @@ const ProductCard = (product: ProductType) => {
       <span>{category}</span>
       <h3>{name}</h3>
       <span>{formatToUSDCurrency(price)}</span>
-      <div>
-        <button onClick={() => handleQtyChange('decrement')}>-</button>
-        <span>{itemQty}</span>
-        <button onClick={() => handleQtyChange('increment')}>+</button>
-      </div>
-      <button onClick={() => addItemToCart({ name, price, quantity: itemQty })}>
-        Add to Cart
-      </button>
+      {isAddedToCart && item[name]?.quantity ? (
+        <div>
+          <button
+            title="Decrement"
+            aria-label={`Decrement ${name}`}
+            onClick={() => handleQtyChange('decrement')}
+          >
+            <img src={DecrementIcon} alt="decrement icon" aria-hidden="true" />
+          </button>
+          <span>{itemQty}</span>
+          <button
+            title="Increment"
+            aria-label={`Increment ${name}`}
+            onClick={() => handleQtyChange('increment')}
+          >
+            <img src={IncrementIcon} alt="increment icon" aria-hidden="true" />
+          </button>
+        </div>
+      ) : (
+        <button onClick={() => addItemToCart({ ...product })}>
+          <img src={CartIcon} alt="add to cart icon" aria-hidden="true" />
+          Add to Cart
+        </button>
+      )}
     </article>
   );
 };

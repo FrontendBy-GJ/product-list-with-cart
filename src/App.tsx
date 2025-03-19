@@ -1,4 +1,5 @@
-import ProductsList from './features/products/ProductsList';
+import Cart from '@/features/cart/Cart';
+import ProductsList from '@/features/products/ProductsList';
 
 function App() {
   return (
@@ -7,10 +8,7 @@ function App() {
         <h1>Desserts</h1>
         <ProductsList />
       </section>
-      {/* Cart */}
-      <aside>
-        <h2>Your Cart ()</h2>
-      </aside>
+      <Cart />
     </main>
   );
 }
