@@ -70,23 +70,23 @@ const ProductCard = (product: ProductType) => {
         <div>
           <button
             title="Decrement"
-            aria-label={`Decrement ${name}`}
+            aria-label={`Decrement ${name}. Current quantity: ${itemQty}`}
             onClick={() => handleQtyChange('decrement')}
           >
-            <img src={DecrementIcon} alt="decrement icon" aria-hidden="true" />
+            <img src={DecrementIcon} alt="" aria-hidden="true" />
           </button>
-          <span>{itemQty}</span>
+          <span aria-label={`Quantity: ${itemQty}`}>{itemQty}</span>
           <button
             title="Increment"
-            aria-label={`Increment ${name}`}
+            aria-label={`Increment ${name}. Current quantity: ${itemQty}`}
             onClick={() => handleQtyChange('increment')}
           >
-            <img src={IncrementIcon} alt="increment icon" aria-hidden="true" />
+            <img src={IncrementIcon} alt="" aria-hidden="true" />
           </button>
         </div>
       ) : (
         <button onClick={() => addItemToCart({ ...product })}>
-          <img src={CartIcon} alt="add to cart icon" aria-hidden="true" />
+          <img src={CartIcon} alt="" aria-hidden="true" />
           Add to Cart
         </button>
       )}
