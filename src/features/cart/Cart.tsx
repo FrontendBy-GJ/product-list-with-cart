@@ -26,40 +26,57 @@ const Cart = () => {
   } else {
     cartContent = (
       <>
-        <ul>
+        <dl>
           {Object.values(cartItems).map((item) => {
             const { name, price, quantity } = item;
             const orderTotal = price * quantity;
+            const itemID = `cart-item-${name
+              .replace(/\s+/g, '-')
+              .toLowerCase()}`;
+            console.log(itemID);
 
             return (
-              <li key={name}>
-                <span className="item-name">{name}</span>
-                <div className="item-details">
-                  <span className="item-details__qty">{quantity}x</span>
-                  <span className="item-details__price">
-                    @{formatToUSDCurrency(price)}
-                  </span>
-                  <span className="item-details__total">
-                    {formatToUSDCurrency(orderTotal)}
-                  </span>
+              <div
+                key={name}
+                role="group"
+                aria-labelledby={itemID}
+                className="cart-details"
+              >
+                <div>
+                  <dt id={itemID} className="item-name">
+                    {name}
+                  </dt>
+                  <dd className="item-details">
+                    <span className="item-details__qty">
+                      {quantity}
+                      <span aria-hidden="true">x</span>
+                    </span>
+                    <span className="item-details__price">
+                      @{formatToUSDCurrency(price)}
+                    </span>
+                    <span className="item-details__subtotal">
+                      <span className="sr-only">Subtotal: </span>
+                      {formatToUSDCurrency(orderTotal)}
+                    </span>
+                  </dd>
                 </div>
                 <button
                   aria-label={`Remove ${name}`}
                   onClick={() => dispatch(removeFromCart(item))}
                 >
-                  <img src={removeSvg} alt="remove item" />
+                  <img src={removeSvg} alt="" aria-hidden="true" />
                 </button>
-              </li>
+              </div>
             );
           })}
-        </ul>
+        </dl>
         <div className="order-total">
           <span>Order Total</span>
           <span>{formatToUSDCurrency(cartTotal)}</span>
         </div>
-        <div className="delivery-msg">
-          <img src={carbonIcon} alt="carbon neutral" />
-          <p>
+        <div className="delivery-msg" aria-labelledby="delivery-description">
+          <img src={carbonIcon} alt="" aria-hidden="true" />
+          <p id="delivery-description">
             This is a <span>carbon-neutral</span> delivery
           </p>
         </div>
