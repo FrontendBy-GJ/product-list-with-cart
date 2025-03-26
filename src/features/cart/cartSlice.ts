@@ -75,6 +75,9 @@ const cartSlice = createSlice({
         }
       }
     },
+    clearCart: (state) => {
+      state.items = {};
+    },
   },
   extraReducers: (builder) => {
     builder.addMatcher(
@@ -89,8 +92,13 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart, increaseQty, decreaseQty } =
-  cartSlice.actions;
+export const {
+  addToCart,
+  removeFromCart,
+  increaseQty,
+  decreaseQty,
+  clearCart,
+} = cartSlice.actions;
 export default cartSlice.reducer;
 
 // Selectors

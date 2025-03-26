@@ -4,6 +4,7 @@ import { formatToUSDCurrency } from '@/utils/utils';
 import removeSvg from '@/assets/icon-remove-item.svg';
 import carbonIcon from '@/assets/icon-carbon-neutral.svg';
 import emptyCart from '@/assets/illustration-empty-cart.svg';
+import { confirmOrder } from '@/features/confirmation-modal/modalSlice';
 
 const Cart = () => {
   const dispatch = useAppDispatch();
@@ -13,6 +14,8 @@ const Cart = () => {
     (totalItems, item) => totalItems + item.quantity,
     0
   );
+
+  const handleConfirmOrder = () => dispatch(confirmOrder(true));
 
   let cartContent: React.ReactNode;
 
@@ -33,7 +36,6 @@ const Cart = () => {
             const itemID = `cart-item-${name
               .replace(/\s+/g, '-')
               .toLowerCase()}`;
-            console.log(itemID);
 
             return (
               <div
@@ -80,7 +82,9 @@ const Cart = () => {
             This is a <span>carbon-neutral</span> delivery
           </p>
         </div>
-        <button className="confirm-order-btn">Confirm Order</button>
+        <button onClick={handleConfirmOrder} className="confirm-order-btn">
+          Confirm Order
+        </button>
       </>
     );
   }
