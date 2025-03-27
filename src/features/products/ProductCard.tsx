@@ -35,6 +35,7 @@ const ProductCard = (product: ProductType) => {
     if (action === 'decrement') {
       if (itemQty === 1) {
         dispatch(removeFromCart(product));
+        setIsAddedToCart(false);
       } else {
         setItemQty((prev) => prev - 1);
         dispatch(decreaseQty(product));
@@ -58,38 +59,42 @@ const ProductCard = (product: ProductType) => {
 
   return (
     <article>
-      <picture>
+      <picture data-in-cart={`${item[name]?.quantity && 'true'}`}>
         <source media="(min-width: 1024px)" srcSet={image.desktop} />
         <source media="(min-width: 768px)" srcSet={image.tablet} />
         <img src={image.mobile} alt={name} />
+
+        {isAddedToCart && item[name]?.quantity ? (
+          <div className="qty-stepper">
+            <button
+              title="Decrement"
+              aria-label={`Decrement ${name}. Current quantity: ${itemQty}`}
+              onClick={() => handleQtyChange('decrement')}
+            >
+              <img src={DecrementIcon} alt="" aria-hidden="true" />
+            </button>
+            <span aria-label={`Quantity: ${itemQty}`}>{itemQty}</span>
+            <button
+              title="Increment"
+              aria-label={`Increment ${name}. Current quantity: ${itemQty}`}
+              onClick={() => handleQtyChange('increment')}
+            >
+              <img src={IncrementIcon} alt="" aria-hidden="true" />
+            </button>
+          </div>
+        ) : (
+          <button
+            className="add-to-cart-btn"
+            onClick={() => addItemToCart({ ...product })}
+          >
+            <img src={CartIcon} alt="" aria-hidden="true" />
+            Add to Cart
+          </button>
+        )}
       </picture>
-      <span>{category}</span>
-      <h3>{name}</h3>
-      <span>{formatToUSDCurrency(price)}</span>
-      {isAddedToCart && item[name]?.quantity ? (
-        <div>
-          <button
-            title="Decrement"
-            aria-label={`Decrement ${name}. Current quantity: ${itemQty}`}
-            onClick={() => handleQtyChange('decrement')}
-          >
-            <img src={DecrementIcon} alt="" aria-hidden="true" />
-          </button>
-          <span aria-label={`Quantity: ${itemQty}`}>{itemQty}</span>
-          <button
-            title="Increment"
-            aria-label={`Increment ${name}. Current quantity: ${itemQty}`}
-            onClick={() => handleQtyChange('increment')}
-          >
-            <img src={IncrementIcon} alt="" aria-hidden="true" />
-          </button>
-        </div>
-      ) : (
-        <button onClick={() => addItemToCart({ ...product })}>
-          <img src={CartIcon} alt="" aria-hidden="true" />
-          Add to Cart
-        </button>
-      )}
+      <span className="category">{category}</span>
+      <h3 className="product-name">{name}</h3>
+      <span className="product-price">{formatToUSDCurrency(price)}</span>
     </article>
   );
 };

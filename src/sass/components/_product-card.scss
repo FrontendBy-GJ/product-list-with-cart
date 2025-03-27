@@ -1,0 +1,62 @@
+@use '../abstracts/colors' as *;
+
+article {
+  picture {
+    &[data-in-cart='true'] {
+      outline: 2px solid $red;
+    }
+
+    position: relative;
+    margin-block-end: 2.3rem;
+    border-radius: 10px;
+
+    > img {
+      border-radius: inherit;
+    }
+
+    .qty-stepper,
+    .add-to-cart-btn {
+      position: absolute;
+      inset: 90% 25% -10% 25%;
+      display: flex;
+      align-items: center;
+      border-radius: 30px;
+    }
+    .add-to-cart-btn {
+      border: 1px solid $rose-400;
+      justify-content: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      color: $rose-900;
+      background-color: $rose-50;
+    }
+    .qty-stepper {
+      border: 1px solid $red;
+      background-color: $red;
+      justify-content: space-between;
+      padding-inline: 1rem;
+      color: $rose-50;
+      font-weight: 600;
+
+      button {
+        border: 1px solid $rose-50;
+        border-radius: 50%;
+        background-color: inherit;
+        width: fit-content;
+        aspect-ratio: 1;
+        color: inherit;
+      }
+    }
+  }
+
+  .category {
+    color: $rose-500;
+  }
+  .product-name {
+    color: $rose-900;
+  }
+  .product-price {
+    color: $red;
+    font-weight: 600;
+  }
+}

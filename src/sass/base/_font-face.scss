@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'RedHat';
+  src: url('/fonts/RedHatText-VariableFont_wght.ttf') format('truetype'),
+    url('/fonts/static/RedHatText-Bold.ttf') format('truetype'),
+    url('/fonts/static/RedHatText-Regular.ttf') format('truetype'),
+    url('/fonts/static/RedHatText-SemiBold.ttf') format('truetype'),
+    url('/fonts/RedHatText-Italic-VariableFont_wght.ttf') format('trutype');
+  font-weight: 400 600 700;
+  font-style: normal italic;
+}
