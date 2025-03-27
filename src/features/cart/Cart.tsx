@@ -21,10 +21,10 @@ const Cart = () => {
 
   if (!Object.entries(cartItems).length) {
     cartContent = (
-      <>
+      <div className="empty-cart">
         <img role="presentation" aria-hidden="true" src={emptyCart} alt="" />
         <p>Your added items will appear here</p>
-      </>
+      </div>
     );
   } else {
     cartContent = (
