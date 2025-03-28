@@ -11,6 +11,16 @@ main {
   margin-inline: auto;
   display: grid;
   padding: 1.3rem;
+
+  @media (width >= rem(768)) {
+    gap: 2rem;
+    padding-inline: 4rem;
+    padding-block: 2rem;
+  }
+
+  @media (width >= rem(1040)) {
+    grid-template-columns: 2fr 1fr;
+  }
 }
 
 h1 {
@@ -19,12 +29,6 @@ h1 {
 
 button {
   cursor: pointer;
-}
-
-@media (width >= rem(768)) {
-  main {
-    grid-template-columns: 1fr auto;
-  }
 }
 
 @media (prefers-reduced-motion: no-preference) {

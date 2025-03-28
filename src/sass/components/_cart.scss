@@ -56,6 +56,12 @@
       }
     }
   }
+  @media (width >= rem(1040)) {
+    place-self: start stretch;
+    padding-inline: 1rem;
+    position: sticky;
+    top: 2rem;
+  }
 }
 
 .order-total {

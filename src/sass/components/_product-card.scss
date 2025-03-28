@@ -17,10 +17,14 @@ article {
     .qty-stepper,
     .add-to-cart-btn {
       position: absolute;
-      inset: 90% 25% -10% 25%;
+      bottom: 0;
+      left: 50%;
+      transform: translateY(50%) translateX(-50%);
       display: flex;
       align-items: center;
       border-radius: 30px;
+      width: min(170px, 100%);
+      padding-block: 0.7rem;
     }
     .add-to-cart-btn {
       border: 1px solid $rose-400;
