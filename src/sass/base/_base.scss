@@ -17,6 +17,10 @@ h1 {
   font-size: 2rem;
 }
 
+button {
+  cursor: pointer;
+}
+
 @media (width >= rem(768)) {
   main {
     grid-template-columns: 1fr auto;
