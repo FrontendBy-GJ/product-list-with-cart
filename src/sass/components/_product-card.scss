@@ -33,6 +33,15 @@ article {
       font-weight: 600;
       color: $rose-900;
       background-color: $rose-50;
+      transition-property: color, border-color;
+      transition-duration: 300ms;
+      transition-timing-function: ease;
+
+      &:hover,
+      &:focus-visible {
+        color: $red;
+        border-color: $red;
+      }
     }
     .qty-stepper {
       border: 1px solid $red;
@@ -49,6 +58,19 @@ article {
         width: fit-content;
         aspect-ratio: 1;
         color: inherit;
+        transition-property: border-color, background-color, stroke;
+        transition-duration: 300ms;
+        transition-timing-function: ease;
+
+        &:hover,
+        &:focus-visible {
+          border-color: $red;
+          background-color: $rose-50;
+
+          svg {
+            stroke: $red;
+          }
+        }
       }
     }
   }
