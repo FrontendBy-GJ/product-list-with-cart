@@ -7,10 +7,8 @@ import {
   removeFromCart,
   selectCartItems,
 } from '../cart/cartSlice';
-import { useState } from 'react';
+import { SVGProps, useState } from 'react';
 import CartIcon from '@/assets/icon-add-to-cart.svg';
-import DecrementIcon from '@/assets/icon-decrement-quantity.svg';
-import IncrementIcon from '@/assets/icon-increment-quantity.svg';
 
 export type ProductType = {
   image: {
@@ -71,7 +69,7 @@ const ProductCard = (product: ProductType) => {
               aria-label={`Decrement ${name}. Current quantity: ${itemQty}`}
               onClick={() => handleQtyChange('decrement')}
             >
-              <img src={DecrementIcon} alt="" aria-hidden="true" />
+              <DecrementIcon aria-hidden="true" />
             </button>
             <span aria-label={`Quantity: ${itemQty}`}>{itemQty}</span>
             <button
@@ -79,7 +77,7 @@ const ProductCard = (product: ProductType) => {
               aria-label={`Increment ${name}. Current quantity: ${itemQty}`}
               onClick={() => handleQtyChange('increment')}
             >
-              <img src={IncrementIcon} alt="" aria-hidden="true" />
+              <IncrementIcon aria-hidden="true" />
             </button>
           </div>
         ) : (
@@ -100,3 +98,36 @@ const ProductCard = (product: ProductType) => {
 };
 
 export default ProductCard;
+
+function DecrementIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="10"
+      height="2"
+      fill="none"
+      viewBox="0 0 10 2"
+    >
+      <path fill="#fff" d="M0 .375h10v1.25H0V.375Z" />
+    </svg>
+  );
+}
+
+function IncrementIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="10"
+      height="10"
+      fill="none"
+      viewBox="0 0 10 10"
+    >
+      <path
+        fill="#fff"
+        d="M10 4.375H5.625V0h-1.25v4.375H0v1.25h4.375V10h1.25V5.625H10v-1.25Z"
+      />
+    </svg>
+  );
+}

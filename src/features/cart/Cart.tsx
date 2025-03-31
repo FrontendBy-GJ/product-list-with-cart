@@ -1,10 +1,10 @@
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { removeFromCart, selectCartItems, selectCartTotal } from './cartSlice';
 import { formatToUSDCurrency } from '@/utils/utils';
-import removeSvg from '@/assets/icon-remove-item.svg';
 import carbonIcon from '@/assets/icon-carbon-neutral.svg';
 import emptyCart from '@/assets/illustration-empty-cart.svg';
 import { confirmOrder } from '@/features/confirmation-modal/modalSlice';
+import { SVGProps } from 'react';
 
 const Cart = () => {
   const dispatch = useAppDispatch();
@@ -66,7 +66,7 @@ const Cart = () => {
                   aria-label={`Remove ${name}`}
                   onClick={() => dispatch(removeFromCart(item))}
                 >
-                  <img src={removeSvg} alt="" aria-hidden="true" />
+                  <RemoveSVG aria-hidden="true" />
                 </button>
               </div>
             );
@@ -98,3 +98,21 @@ const Cart = () => {
 };
 
 export default Cart;
+
+function RemoveSVG(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="10"
+      height="10"
+      fill="none"
+      viewBox="0 0 10 10"
+    >
+      <path
+        fill="#CAAFA7"
+        d="M8.375 9.375 5 6 1.625 9.375l-1-1L4 5 .625 1.625l1-1L5 4 8.375.625l1 1L6 5l3.375 3.375-1 1Z"
+      />
+    </svg>
+  );
+}
