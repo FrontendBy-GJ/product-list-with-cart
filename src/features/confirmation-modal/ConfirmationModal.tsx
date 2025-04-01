@@ -33,10 +33,10 @@ const ConfirmationModal = () => {
     <dialog ref={modalRef} onClose={() => dispatch(confirmOrder(false))}>
       <header>
         <img src={confirmIcon} alt="" aria-hidden="true" />
-        <h1>Order Confirmed</h1>
+        <h2>Order Confirmed</h2>
         <p>We hope you enjoy your food!</p>
       </header>
-      <main>
+      <section>
         <dl>
           {Object.values(cartItems).map((item) => {
             const { image, name, price, quantity } = item;
@@ -84,7 +84,7 @@ const ConfirmationModal = () => {
             {formatToUSDCurrency(cartTotal)}
           </span>
         </div>
-      </main>
+      </section>
       <footer>
         <button onClick={handleNewOrder}>Start New Order</button>
       </footer>

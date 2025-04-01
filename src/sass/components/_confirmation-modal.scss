@@ -64,7 +64,7 @@ dialog {
   header {
     margin-block: 1rem;
 
-    h1 {
+    h2 {
       color: $rose-900;
       margin-block-start: 1rem;
     }
@@ -76,12 +76,14 @@ dialog {
 }
 
 dialog {
-  main {
+  section {
     background-color: $rose-100;
     border-radius: 10px;
     margin-block-start: 1.5rem;
     display: grid;
     grid-template-columns: 1fr;
+    padding-inline: 0.7rem;
+    padding-block: 0.5rem;
 
     dl {
       .order-details {
@@ -113,7 +115,7 @@ dialog {
             width: var(--text-width);
 
             @media (width >= rem(768)) {
-              width: unset;
+              // width: unset;
             }
           }
           .order-details__qty {
@@ -132,7 +134,7 @@ dialog {
     }
     @media (width >= rem(768)) {
       padding-inline: 1rem;
-      padding-block: 1rem;
+      padding-block: 0.8rem;
     }
   }
 }
@@ -152,7 +154,7 @@ dialog {
     font-size: rem(20);
   }
   @media (width >= rem(768)) {
-    margin-block-start: unset;
+    // margin-block-start: unset;
   }
 }
 
