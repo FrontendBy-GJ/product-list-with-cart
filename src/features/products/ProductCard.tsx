@@ -57,11 +57,12 @@ const ProductCard = (product: ProductType) => {
 
   return (
     <article>
-      <picture data-in-cart={`${item[name]?.quantity && 'true'}`}>
-        <source media="(min-width: 1024px)" srcSet={image.desktop} />
-        <source media="(min-width: 768px)" srcSet={image.tablet} />
-        <img src={image.mobile} alt={name} />
-
+      <div className="product-img-wrapper">
+        <picture data-in-cart={`${item[name]?.quantity && 'true'}`}>
+          <source media="(min-width: 1024px)" srcSet={image.desktop} />
+          <source media="(min-width: 768px)" srcSet={image.tablet} />
+          <img src={image.mobile} alt={name} />
+        </picture>
         {isAddedToCart && item[name]?.quantity ? (
           <div className="qty-stepper">
             <button
@@ -89,9 +90,9 @@ const ProductCard = (product: ProductType) => {
             Add to Cart
           </button>
         )}
-      </picture>
+      </div>
       <span className="category">{category}</span>
-      <h3 className="product-name">{name}</h3>
+      <h2 className="product-name">{name}</h2>
       <span className="product-price">{formatToUSDCurrency(price)}</span>
     </article>
   );

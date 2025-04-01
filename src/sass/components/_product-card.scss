@@ -1,18 +1,9 @@
 @use '../abstracts/colors' as *;
+@use '../abstracts/functions' as *;
 
 article {
-  picture {
-    &[data-in-cart='true'] {
-      outline: 2px solid $red;
-    }
-
+  .product-img-wrapper {
     position: relative;
-    margin-block-end: 2.3rem;
-    border-radius: 10px;
-
-    > img {
-      border-radius: inherit;
-    }
 
     .qty-stepper,
     .add-to-cart-btn {
@@ -73,6 +64,19 @@ article {
         }
       }
     }
+
+    picture {
+      &[data-in-cart='true'] {
+        outline: 2px solid $red;
+      }
+
+      margin-block-end: 2.3rem;
+      border-radius: 10px;
+
+      > img {
+        border-radius: inherit;
+      }
+    }
   }
 
   .category {
@@ -80,6 +84,7 @@ article {
   }
   .product-name {
     color: $rose-900;
+    font-size: rem(18);
   }
   .product-price {
     color: $red;
